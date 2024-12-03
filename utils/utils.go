@@ -51,6 +51,10 @@ func IsAplpha(c rune) bool {
 	return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '-'
 }
 
+func IsAplphaAndQuote(c rune) bool {
+	return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '-' || c == '\''
+}
+
 func IsSpace(c rune) bool {
 	return c == ' ' || c == '\t'
 }
@@ -72,6 +76,25 @@ func ReadInt(r *bufio.Reader) int {
 		buf.WriteRune(c)
 	}
 	return Atoi(buf.String())
+}
+
+func ReadStringAndQuote(r *bufio.Reader) string {
+	var (
+		buf bytes.Buffer
+	)
+	r.UnreadRune()
+	for {
+		c, _, err := r.ReadRune()
+		if err != nil {
+			break
+		}
+		if !IsAplphaAndQuote(c) {
+			r.UnreadRune()
+			break
+		}
+		buf.WriteRune(c)
+	}
+	return buf.String()
 }
 
 func ReadString(r *bufio.Reader) string {
