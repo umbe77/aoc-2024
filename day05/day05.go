@@ -81,37 +81,18 @@ func Parse(input []string) Rules {
 func part1(rules Rules) int {
 	sum := 0
 
-	// fmt.Println(rules.RB)
-	// fmt.Println(rules.RE)
-	// [29:4 47:1 53:3 61:2 75:0]
 	for i, p := range rules.P {
 		valid := true
 		for k, v := range p {
-			// fmt.Println(k, v)
 			if _, ok := rules.RB[k]; ok {
 				for _, b := range rules.RB[k] {
 					if e, bOk := p[b]; bOk && e < v {
-						// if i == 0 {
-						// 	fmt.Println("begin", "p", p, "b", b, "e", e, "v", v, rules.RB[k])
-						// }
 						valid = false
 						break
 					}
 				}
 			}
-			// if _, ok := rules.RE[k]; ok {
-			// 	for _, e := range rules.RE[k] {
-			// 		if b, eOk := p[e]; eOk && b < v {
-			// 			if i == 0 {
-			// 				fmt.Println("end", i, p, b, e, v)
-			// 			}
-			// 			valid = false
-			// 			break
-			// 		}
-			// 	}
-			// }
 		}
-		// fmt.Println(p, valid)
 		if valid {
 			idx := int(math.Floor(float64(len(rules.P[i])) / 2))
 			sum = sum + rules.Pi[i][idx]
@@ -128,13 +109,9 @@ func part2(rules Rules) int {
 	for i, p := range rules.P {
 		valid := true
 		for k, v := range p {
-			// fmt.Println(k, v)
 			if _, ok := rules.RB[k]; ok {
 				for _, b := range rules.RB[k] {
 					if e, bOk := p[b]; bOk && e < v {
-						// if i == 0 {
-						// 	fmt.Println("begin", "p", p, "b", b, "e", e, "v", v, rules.RB[k])
-						// }
 						valid = false
 						break
 					}
@@ -147,7 +124,6 @@ func part2(rules Rules) int {
 	}
 
 	for _, prints := range notValid {
-		// fmt.Println(prints)
 		slices.SortFunc(prints, func(a, b int) int {
 			if _, ok := rules.RB[a]; ok {
 				for _, v := range rules.RB[a] {
@@ -168,8 +144,6 @@ func part2(rules Rules) int {
 		
 		idx := int(math.Floor(float64(len(prints)) / 2))
 		sum = sum + prints[idx]
-		// fmt.Println(idx, prints[idx], prints)
-		// fmt.Println("---------")
 
 	}
 
