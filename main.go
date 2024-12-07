@@ -9,6 +9,7 @@ import (
 	"github.com/umbe77/aoc-2024/day03"
 	"github.com/umbe77/aoc-2024/day04"
 	"github.com/umbe77/aoc-2024/day05"
+	"github.com/umbe77/aoc-2024/day06"
 )
 
 func main() {
@@ -32,6 +33,9 @@ func main() {
 		break
 	case "05":
 		day05.Execute()
+		break
+	case "06":
+		day06.Execute()
 		break
 	}
 }
