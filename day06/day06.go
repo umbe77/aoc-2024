@@ -138,7 +138,6 @@ func part2(labMap LabMap) int {
 
 		tCurrentPos := labMap.GuardInit
 		newObstaclesHits := 0
-		tVisited := make(map[Point]bool)
 		isStuckInLoop := false
 		for {
 			newPoint := Advance(tCurrentPos, (4+tDirection)%4) //uso l'addizione modulare per tenere traccia della direzione
@@ -160,11 +159,7 @@ func part2(labMap LabMap) int {
 				tDirection = tDirection + 1
 				continue
 			}
-			// devo contare i punti in maniera univoca
 			tCurrentPos = newPoint
-			if _, ok := tVisited[tCurrentPos]; !ok {
-				tVisited[tCurrentPos] = true
-			}
 		}
 		if isStuckInLoop {
 			countStuck = countStuck + 1
